@@ -1,129 +1,169 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta name="description" content="英語単語しりとりゲーム。30秒以内にいくつ単語を答えられるか競うゲームです。無料・ブラウザで遊べます。">
+  <meta name="description" content="英語単語しりとりゲーム。30秒以内にいくつ単語を答えられるか競う無料ブラウザゲーム。語彙力アップにおすすめ。">
   <meta name="keywords" content="英単語, しりとり, 英語ゲーム, 英語学習, vocabulary game">
   <meta name="robots" content="index, follow">
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <!-- OGP -->
   <meta property="og:title" content="英単語しりとりゲーム">
   <meta property="og:description" content="英単語しりとりで語彙力アップ！30秒以内にいくつ答えられるか！？ブラウザで遊べる英語学習ゲーム。">
   <meta property="og:image" content="https://english-words-shiritori.netlify.app/ogp.png" />
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://english-words-shiritori.netlify.app/">
-  <!-- Twitter cards -->
+
+  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="英単語しりとりゲーム" />
   <meta name="twitter:description" content="英語の語彙力を遊びながら強化できる英単語しりとりゲーム。" />
   <meta name="twitter:image" content="https://english-words-shiritori.netlify.app/ogp.png" />
-  <!-- search console -->
-  <meta name="google-site-verification" content="oxR3PA2ufUfLp6LOTX0GuRWGWcdk2L9owvgkxM7xQsc" />
-  <title>英単語しりとり（dictionary.txt 使用）</title>
+
+  <title>英単語しりとり | 英語力を鍛えるWebゲーム</title>
+
   <style>
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: #f5f5f5;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-    }
+  :root {
+    --bg: #f7f9fc;
+    --text-main: #1a1a1a;
+    --text-sub: #666;
+    --white: #fff;
+    --accent: #4f46e5;
+    --radius: 16px;
+    --shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+  }
 
-    .container {
-      background: #ffffff;
-      padding: 24px 28px;
-      border-radius: 12px;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
-      width: 360px;
-      box-sizing: border-box;
-    }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: var(--bg);
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+  }
 
-    h1 {
-      font-size: 20px;
-      margin-top: 0;
-      margin-bottom: 16px;
-      text-align: center;
-    }
+  .container {
+    background: var(--white);
+    padding: 28px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    width: 360px;
+    box-sizing: border-box;
+  }
 
-    p {
-      margin: 6px 0;
-      font-size: 14px;
-    }
+  h1 {
+    font-size: 1.4rem;
+    margin-top: 0;
+    margin-bottom: 16px;
+    text-align: center;
+    font-weight: 600;
+  }
 
-    .label {
-      font-weight: bold;
-    }
+  p {
+    margin: 6px 0;
+    font-size: 14px;
+    color: var(--text-main);
+  }
 
-    #startBtn {
-      margin-top: 10px;
-      margin-bottom: 16px;
-      width: 100%;
-      padding: 10px;
-      font-size: 16px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      background: #28a745;
-      color: #fff;
-    }
+  .label {
+    font-weight: bold;
+  }
 
-    #prevWord,
-    #lastChar,
-    #score,
-    #time {
-      font-weight: bold;
-    }
+  /* ---- Buttons ---- */
+  #startBtn, #okBtn {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    color: #fff;
+    margin-top: 10px;
+    transition: transform 0.1s ease-out, background 0.2s ease;
+  }
 
-    #inputWord {
-      width: 100%;
-      padding: 8px 10px;
-      font-size: 16px;
-      box-sizing: border-box;
-      margin-top: 8px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-    }
+  #startBtn {
+    background: var(--accent);
+    font-weight: 600;
+  }
 
-    #okBtn {
-      margin-top: 10px;
-      width: 100%;
-      padding: 8px 10px;
-      font-size: 16px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      background: #1976d2;
-      color: #fff;
-    }
+  #startBtn:hover {
+    background: #4338ca;
+    transform: translateY(-2px);
+  }
 
-    #okBtn:disabled {
-      background: #999;
-      cursor: not-allowed;
-    }
+  #okBtn {
+    background: var(--accent);
+    font-weight: 600;
+  }
 
-    #message {
-      margin-top: 10px;
-      min-height: 18px;
-      font-size: 13px;
-      color: #d32f2f;
-    }
+  #okBtn:hover {
+    background: #4338ca;
+    transform: translateY(-2px);
+  }
 
-    .status-row {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 10px;
-      font-size: 14px;
-    }
+  #okBtn:disabled {
+    background: #999;
+    cursor: not-allowed;
+  }
 
-    .hint {
-      margin-top: 6px;
-      font-size: 12px;
-      color: #666;
-    }
+  /* ---- Input ---- */
+  #inputWord {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    box-sizing: border-box;
+    margin-top: 8px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+  }
+
+  /* ---- status ---- */
+  .status-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 14px;
+    font-size: 14px;
+    color: var(--text-sub);
+  }
+
+  #message {
+    margin-top: 12px;
+    min-height: 18px;
+    font-size: 14px;
+    color: #d32f2f;
+  }
+
+  .hint {
+    margin-top: 6px;
+    font-size: 12px;
+    color: var(--text-sub);
+  }
+
+  /* ---- back to home ---- */
+  .back-home {
+    margin-top: 26px;
+    text-align: center;
+  }
+  .back-home a {
+    display: inline-block;
+    padding: 10px 18px;
+    background: var(--accent);
+    color: #fff;
+    border-radius: 999px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background 0.2s ease, transform 0.1s ease-out;
+  }
+  .back-home a:hover {
+    background: #4338ca;
+    transform: translateY(-2px);
+  }
   </style>
 </head>
+
 <body>
   <div class="container">
     <h1>英単語しりとり</h1>
@@ -133,12 +173,7 @@
     <p><span class="label">前の単語：</span><span id="prevWord">apple</span></p>
     <p><span class="label">最後の文字：</span><span id="lastChar">e</span></p>
 
-    <input
-      id="inputWord"
-      placeholder="英単語を入力（例：elephant）"
-      autocomplete="off"
-      disabled
-    />
+    <input id="inputWord" placeholder="英単語を入力（例：elephant）" autocomplete="off" disabled />
     <button id="okBtn" disabled>辞書読み込み中...</button>
 
     <div class="status-row">
@@ -147,160 +182,161 @@
     </div>
 
     <p id="message"></p>
-    <p class="hint">
-      ※ 1行1単語・小文字推奨
-    </p>
-    <p style="font-size:12px; color:#666; margin-top:10px; text-align:left;">
-ブラウザで遊べる無料の英単語しりとりゲームです。</br>
-辞書10万語を参照して正解を判定します。</br>
-あなたは30秒以内にいくつ答えられるか！？
-</p>
 
+    <button id="restartBtn" style="display:none; margin-top:12px; width:100%; padding:10px;
+  border:none; border-radius:6px; background:#4f46e5; color:white; font-size:16px; cursor:pointer;">
+  もう一度挑戦する
+    </button>
+
+
+    <p class="hint">※ 小文字推奨・1行1単語で入力してください</p>
+
+    <div class="back-home">
+      <a href="https://english-learning-games.netlify.app/">← ホームへ戻る</a>
+    </div>
   </div>
 
+  <!-- script はそのまま -->
   <script>
-    // =========================
-    //  辞書読み込み
-    // =========================
-    let DICTIONARY = new Set();
-    let dictLoaded = false;
+// =========================
+//  辞書読み込み
+// =========================
+let DICTIONARY = new Set();
+let dictLoaded = false;
 
-    async function loadDictionary() {
-      try {
-        const res = await fetch("dictionary.txt"); // 同じフォルダの辞書ファイル
-        if (!res.ok) {
-          throw new Error("HTTP error " + res.status);
-        }
-
-        const text = await res.text();
-        const lines = text.split(/\r?\n/);
-
-        lines.forEach((line) => {
-          const w = line.trim().toLowerCase();
-          if (w) DICTIONARY.add(w);
-        });
-
-        dictLoaded = true;
-        okBtn.disabled = false;
-        okBtn.textContent = "OK";
-        showMessage(`辞書読み込み完了（${DICTIONARY.size}語）`, false);
-      } catch (e) {
-        console.error(e);
-        showMessage("辞書の読み込みに失敗しました。", true);
-        okBtn.disabled = true;
-        okBtn.textContent = "エラー";
-      }
+async function loadDictionary() {
+  try {
+    const res = await fetch("dictionary.txt"); // 同じフォルダの辞書ファイル
+    if (!res.ok) {
+      throw new Error("HTTP error " + res.status);
     }
 
-    // =========================
-    //  しりとりゲーム本体
-    // =========================
-    let prevWord = "apple";       // 最初の単語（辞書に入っていなくてもOK）
-    let usedWords = ["apple"];    // 使用済み単語
-    let score = 0;
-    let timeLeft = 30;
-    let gameOver = false;
+    const text = await res.text();
+    const lines = text.split(/\r?\n/);
 
-    const prevWordEl = document.getElementById("prevWord");
-    const lastCharEl = document.getElementById("lastChar");
-    const inputEl = document.getElementById("inputWord");
-    const scoreEl = document.getElementById("score");
-    const timeEl = document.getElementById("time");
-    const okBtn = document.getElementById("okBtn");
-    const messageEl = document.getElementById("message");
+    lines.forEach((line) => {
+      const w = line.trim().toLowerCase();
+      if (w) DICTIONARY.add(w);
+    });
 
-    // 最初の最後の文字表示
-    lastCharEl.textContent = prevWord.slice(-1);
-
-    // 前後の半角・全角スペースを削る
-    function trimSpaces(str) {
-      return str.replace(/^[\s\u3000]+|[\s\u3000]+$/g, "");
-    }
-
-    // メッセージ表示
-    function showMessage(msg, isError = true) {
-      messageEl.style.color = isError ? "#d32f2f" : "#1976d2";
-      messageEl.textContent = msg;
-    }
-
-    // 単語の判定＆更新
-    function submitWord() {
-      if (gameOver || timeLeft <= 0) return;
-
-      if (!dictLoaded) {
-        showMessage("辞書読み込み中です。少し待ってね。");
-        return;
-      }
-
-      let word = inputEl.value.toLowerCase();
-      word = trimSpaces(word);
-      inputEl.value = "";
-
-      if (!word) {
-        showMessage("単語を入力してね。");
-        return;
-      }
-
-      // 英字のみチェック
-      if (!/^[a-z]+$/.test(word)) {
-        showMessage("英字のみで入力してください。（a〜z）");
-        return;
-      }
-
-      // 辞書チェック
-      if (!DICTIONARY.has(word)) {
-        showMessage("辞書に登録されていない単語です。", true);
-        return;
-      }
-
-      const lastChar = prevWord.slice(-1);
-
-      // 先頭文字チェック
-      if (word[0] !== lastChar) {
-        showMessage(`しりとりのルール違反！「${lastChar}」から始めてね。`);
-        return;
-      }
-
-      // 再利用チェック
-      if (usedWords.includes(word)) {
-        showMessage("その単語はすでに使っています。");
-        return;
-      }
-
-      // ここまでクリア → 有効な単語
-      prevWord = word;
-      usedWords.push(word);
-      score++;
-
-      prevWordEl.textContent = word;
-      lastCharEl.textContent = word.slice(-1);
-      scoreEl.textContent = score;
-      showMessage("OK！次の単語へ！", false);
-
-      inputEl.focus();
-    }
-
-    // タイマー
-    let timerId = null;  // グローバルに変更（後で止められるように）
-
-    // スタートボタン
-    const startBtn = document.getElementById("startBtn");
-
-    // ゲーム開始処理
-    function startGame() {
-    // すでに開始されていたら何もしない
-    if (timerId !== null) return;
-
-    // 入力欄とOKボタンを有効化
-    inputEl.disabled = false;
+    dictLoaded = true;
     okBtn.disabled = false;
-    inputEl.focus();
+    okBtn.textContent = "OK";
+    showMessage(`辞書読み込み完了（${DICTIONARY.size}語）`, false);
+  } catch (e) {
+    console.error(e);
+    showMessage("辞書の読み込みに失敗しました。", true);
+    okBtn.disabled = true;
+    okBtn.textContent = "エラー";
+  }
+}
 
-    // スタートボタンを消す
-    startBtn.style.display = "none";
+// =========================
+//  しりとりゲーム本体
+// =========================
+let prevWord = "apple";       // 最初の単語
+let usedWords = ["apple"];    // 使用済み単語
+let score = 0;
+let timeLeft = 30;
+let gameOver = false;
 
-    // タイマー開始
-    timerId = setInterval(() => {
+const prevWordEl = document.getElementById("prevWord");
+const lastCharEl = document.getElementById("lastChar");
+const inputEl = document.getElementById("inputWord");
+const scoreEl = document.getElementById("score");
+const timeEl = document.getElementById("time");
+const okBtn = document.getElementById("okBtn");
+const messageEl = document.getElementById("message");
+const restartBtn = document.getElementById("restartBtn");
+
+// 最初の最後の文字
+lastCharEl.textContent = prevWord.slice(-1);
+
+// 前後の半角・全角スペースを削る
+function trimSpaces(str) {
+  return str.replace(/^[\s\u3000]+|[\s\u3000]+$/g, "");
+}
+
+// メッセージ表示
+function showMessage(msg, isError = true) {
+  messageEl.style.color = isError ? "#d32f2f" : "#1976d2";
+  messageEl.textContent = msg;
+}
+
+// 単語の判定＆更新
+function submitWord() {
+  if (gameOver || timeLeft <= 0) return;
+
+  if (!dictLoaded) {
+    showMessage("辞書読み込み中です。少し待ってね。");
+    return;
+  }
+
+  let word = inputEl.value.toLowerCase();
+  word = trimSpaces(word);
+  inputEl.value = "";
+
+  if (!word) {
+    showMessage("単語を入力してね。");
+    return;
+  }
+
+  // 英字のみ
+  if (!/^[a-z]+$/.test(word)) {
+    showMessage("英字のみで入力してください。（a〜z）");
+    return;
+  }
+
+  // 辞書チェック
+  if (!DICTIONARY.has(word)) {
+    showMessage("辞書に登録されていない単語です。", true);
+    return;
+  }
+
+  const lastChar = prevWord.slice(-1);
+
+  // 先頭文字チェック
+  if (word[0] !== lastChar) {
+    showMessage(`しりとりのルール違反！「${lastChar}」から始めてね。`);
+    return;
+  }
+
+  // 再利用
+  if (usedWords.includes(word)) {
+    showMessage("その単語はすでに使っています。");
+    return;
+  }
+
+  // OK
+  prevWord = word;
+  usedWords.push(word);
+  score++;
+
+  prevWordEl.textContent = word;
+  lastCharEl.textContent = word.slice(-1);
+  scoreEl.textContent = score;
+  showMessage("OK！次の単語へ！", false);
+
+  inputEl.focus();
+}
+
+// タイマー
+let timerId = null;
+
+// スタートボタン
+const startBtn = document.getElementById("startBtn");
+
+function startGame() {
+  if (timerId !== null) return;
+
+  inputEl.disabled = false;
+  okBtn.disabled = false;
+  inputEl.focus();
+
+  startBtn.style.display = "none";
+
+  // タイマー開始
+  timerId = setInterval(() => {
     if (timeLeft > 0) {
       timeLeft--;
       timeEl.textContent = timeLeft;
@@ -311,26 +347,53 @@
         inputEl.disabled = true;
         showMessage(`時間切れ！最終スコア：${score}`, true);
         clearInterval(timerId);
-            }
-          }
-        }, 1000);
+
+        restartBtn.style.display = "block"; 
       }
+    }
+  }, 1000);
+}
 
-    // スタートボタン押したら開始
-    startBtn.addEventListener("click", startGame);
+startBtn.addEventListener("click", startGame);
+okBtn.addEventListener("click", submitWord);
 
-    // イベント登録
-    okBtn.addEventListener("click", submitWord);
+inputEl.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    submitWord();
+  }
+});
 
-    inputEl.addEventListener("keydown", (e) => {
-      if (e.key === "Enter") {
-        submitWord();
-      }
-    });
+window.addEventListener("load", () => {
+  loadDictionary();
+});
 
-    window.addEventListener("load", () => {
-      loadDictionary(); // 起動時に辞書読み込み
-    });
+function restartGame() {
+  // 初期化
+  prevWord = "apple";
+  usedWords = ["apple"];
+  score = 0;
+  timeLeft = 30;
+  gameOver = false;
+
+  prevWordEl.textContent = prevWord;
+  lastCharEl.textContent = "e";
+  scoreEl.textContent = "0";
+  timeEl.textContent = "30";
+
+  inputEl.value = "";
+  inputEl.disabled = false;
+  okBtn.disabled = !dictLoaded;
+  messageEl.textContent = "";
+
+  // ボタン非表示
+  restartBtn.style.display = "none";
+
+  // タイマー再開
+  timerId = null;
+  startGame();
+}
+restartBtn.addEventListener("click", restartGame);
+
   </script>
 </body>
 </html>
